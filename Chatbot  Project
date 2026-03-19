@@ -1,0 +1,32 @@
+from openai import OpenAI
+
+client = OpenAI(api_key="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")
+
+messages = [
+    {"role": "system", "content": "You are a smart assistant."}
+]
+
+print("🤖 Chatbot running... (type 'exit' to quit)\n")
+
+while True:
+    try:
+        user_input = input("You: ")
+
+        if user_input.lower() == "exit":
+            print("Bot: Goodbye 👋")
+            break
+
+        messages.append({"role": "user", "content": user_input})
+
+        response = client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=messages
+        )
+
+        reply = response.choices[0].message.content
+        print("Bot:", reply)
+
+        messages.append({"role": "assistant", "content": reply})
+
+    except Exception as e:
+        print("⚠ Error:", e)
