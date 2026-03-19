@@ -1,5 +1,6 @@
 from openai import OpenAI
 
+# ✅ Put correct OpenAI API key here
 client = OpenAI(api_key="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")
 
 messages = [
